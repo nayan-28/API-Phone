@@ -11,11 +11,15 @@
 
 <body>
     <header>
-        <h3>Hunting Phone</h3>
+        <h3 class="text-center text-3xl ">Hunting Phone</h3>
     </header>
-    <main>
+    <main class="container mx-auto mt-8">
+        <section class="bg-gray-100 p-4 m-4">
+            <input id="search-field" type="text" placeholder="Search" class="input input-bordered w-full max-w-xs" />
+            <button onclick="handleSearch()" class="btn btn-accent">Search</button>
+        </section>
         <section>
-            <div id="phone-container">
+            <div id="phone-container" class="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <!-- <div class="card w-96 bg-base-100 shadow-xl">
                     <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
                     <div class="card-body">
