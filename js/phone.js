@@ -34,7 +34,7 @@ const displayPhone = (phones, isShowAll) => {
                             phone_name
                             }</p>
                         <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
+                            <button onClick="handleShowDetail('${phone.slug}')" class="btn btn-primary">Details</button>
                         </div>
                     </div>
         `;
@@ -67,4 +67,33 @@ const toggleLoadingSpinner = (isLoading) => {
 
 const handleShowAll = () => {
     handleSearch(true);
+}
+
+
+const handleShowDetail = async(id) => {
+    const res = await fetch(` https://openapi.programming-hero.com/api/phone/${id}`);
+
+    const data = await res.json();
+    const phone = data.data;
+    showPhoneDetails(phone);
+}
+
+const showPhoneDetails = (phone) => {
+    const phoneName = document.getElementById('show-detail-phone-name');
+    phoneName.innerText = phone.name;
+
+    const showDetailContainer = document.getElementById('show-detail-container');
+
+    showDetailContainer.innerHTML = `
+    <img src="${phone.image}" alt="" />
+    <p><span >Storage:</span>${phone?.mainFeatures?.storage}</p>
+    <p>Display Size:<span>${phone?.mainFeatures?.displaySize}</span></p>
+    <p>WLAN:<span>${phone?.others?.WLAN}</span></p>
+    <p>Bluetooth:<span>${phone?.others?.Bluetooth}</span></p>
+    <p>GPS:<span>${phone?.others?.GPS}</span></p>
+    <p>NFC:<span>${phone?.others?.NFC}</span></p>
+    `
+    show_details_modal.showModal();
+
+    console.log(phone);
 }
